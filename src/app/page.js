@@ -10,9 +10,10 @@ export default function Home() {
       minHeight: "100%"
     }}>
       <StoreProvider>
-        < Graph />
+        <Graph />
       </ StoreProvider>
-
     </div>
   );
 }
+
+
