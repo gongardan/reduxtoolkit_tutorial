@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Input, TextField } from '@mui/material';
 import { useAppDispatch } from '@/lib/hooks';
-import { onNodeDataChange } from './graphSlice';
+import { onNodeDataChange } from './nodesSlice';
 const handleStyle = { left: 10 };
 
 function TextNode({ data, id }) {

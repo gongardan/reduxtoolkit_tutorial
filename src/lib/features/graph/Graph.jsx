@@ -1,14 +1,12 @@
 'use client'
-import { useCallback, useEffect } from 'react';
 import { ReactFlow, Background, Controls, Panel } from '@xyflow/react';
-import { onNodesChange, onEdgesChange, onConnect, onAddEdge, onAddNode , onMove} from './graphSlice';
+import { onNodesChange, onAddNode, onMove } from './nodesSlice';
+import { onEdgesChange, onConnect, onAddEdge } from './edgesSlice';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import '@xyflow/react/dist/style.css'
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
 import HdrStrongOutlinedIcon from '@mui/icons-material/HdrStrongOutlined';
 import ShareIcon from '@mui/icons-material/Share';
 //import { useDispatch, useSelector, useStore } from "react-redux";
@@ -20,10 +18,10 @@ const nodeTypes = { textNode: TextNode }
 export default function Graph() {
     const dispatch = useAppDispatch();
     const nodes = useAppSelector(state => {
-        return state.graph.nodes
+        return state.nodes.ids.map(key => state.nodes.entities[key])
     });
     const edges = useAppSelector(state => {
-        return state.graph.edges
+        return state.edges;
     });
 
 
