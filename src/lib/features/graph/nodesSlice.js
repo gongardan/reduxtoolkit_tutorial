@@ -1,10 +1,9 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import { applyNodeChanges } from '@xyflow/react';
 import { nanoid } from '@reduxjs/toolkit';
-
+import { useAppSelector } from "@/lib/hooks";
 const nodeAdapter = createEntityAdapter({
     selectId: (node) => {
-
         return node.id
     }, //por default busca la propiedad .id
     sortComparer: (a, b) => a.id - b.id, // en caso de especificar por alguna propiedad
@@ -12,12 +11,11 @@ const nodeAdapter = createEntityAdapter({
 
 const nodesSlice = createSlice({
     name: "nodes",
-    initialState: {
-        ...nodeAdapter.getInitialState(),
+    initialState: nodeAdapter.getInitialState({
         canvas: {
             x: 50, y: 50
         }
-    },
+    }),
 
     reducers: {
         //Logica
@@ -48,5 +46,8 @@ const nodesSlice = createSlice({
 })
 const nodeSelectors = nodeAdapter.getSelectors((state) => state.nodes);
 export const selectNodeById = nodeSelectors.selectById;
+export const selectAll = nodeSelectors.selectAll;
 export const { onNodesChange, onAddNode, onMove, onNodeDataChange } = nodesSlice.actions
+
+export const useNodes = () => useAppSelector(selectAll);
 export default nodesSlice.reducer
